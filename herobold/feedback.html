@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hero Bold Feedback</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../assets/privacy/images/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/css/util.css">
+    <link rel="stylesheet" type="text/css" href="../assets/feedback/css/main.css">
+</head>
+
+<body>
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <form id="google-form" class="contact100-form validate-form">
+                <span class="contact100-form-title">
+                    Feed Back
+                </span>
+
+                <label class="label-input100" for="name">Name *</label>
+                <div class="wrap-input100 validate-input" data-validate="Your Name">
+                    <input id="name" class="input100" type="text" placeholder="Full Name">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <label class="label-input100" for="email">Email *</label>
+                <div class="wrap-input100">
+                    <input id="email" class="input100" type="email" placeholder="Eg. example@email.com">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <label class="label-input100" for="message">Your Feedback *</label>
+                <div class="wrap-input100" data-validate="Message is required">
+                    <textarea id="message" class="input100" placeholder="Feedback here"></textarea>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <label class="label-input100" for="email">Star (Top 5) *</label>
+                <div class="wrap-input100 validate-input" data-validate="Star rating">
+                    <select class="form-control" id="star" style="border: 0px;">
+                        <option>5</option>
+                        <option>4</option>
+                        <option>3</option>
+                        <option>2</option>
+                        <option>1</option>
+                    </select>
+                </div>
+
+                <div class="container-contact100-form-btn">
+                    <button class="contact100-form-btn">
+                        Send
+                    </button>
+                </div>
+            </form>
+            <div class="contact100-pic js-tilt" data-tilt>
+                <img src="../assets/feedback/images/img-01.png" alt="IMG">
+            </div>
+
+        </div>
+    </div>
+
+    <div id="dropDownSelect1"></div>
+    <script src="../assets/feedback/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/feedback/vendor/animsition/js/animsition.min.js"></script>
+    <script src="../assets/feedback/vendor/bootstrap/js/popper.js"></script>
+    <script src="../assets/feedback/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/feedback/vendor/select2/select2.min.js"></script>
+    <script>
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+    </script>
+    <script src="../assets/feedback/vendor/daterangepicker/moment.min.js"></script>
+    <script src="../assets/feedback/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="../assets/feedback/vendor/countdowntime/countdowntime.js"></script>
+    <script src="../assets/feedback/vendor/tilt/tilt.jquery.min.js"></script>
+    <script src="../assets/feedback/js/main.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+        $('#google-form').submit(function (e) {
+            e.preventDefault();
+            if ($('#name').val() && $('#email').val()) {
+                $.ajax({
+                    url: "https://docs.google.com/forms/d/e/1FAIpQLSeDpukp6jkNlFzrUP87d8sX_luDmGr3Sa3N_7cxCHxsRPCO2g/formResponse",
+                    crossDomain: true,
+                    data: {
+                        "entry.10698918": $('#name').val(),
+                        "entry.561588308": $('#email').val(),
+                        "entry.1533378315": $('#message').val(),
+                        "entry.134671687": $('#star').val()
+                    },
+                    type: "POST",
+                    dataType: "JSONP",
+                    complete: function () {
+                        $('#name').val('')
+                        $('#email').val('')
+                        $('#message').val('')
+                        $('#star').val('')
+                        window.location.replace("thank.html");
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
